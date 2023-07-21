@@ -1,0 +1,28 @@
+
+
+
+	<div th:fragment="table_Body">
+    <tr th:each="student : ${liststudent}">
+        <!-- Your table row content... -->
+        <td th:text="${student.id}">Student ID</td>
+        <td th:text="${student.studentname}">Student Name</td>
+        <td th:text="${student.course}">Course</td>
+        <td th:text="${student.fee}">Fee</td>
+        <td>
+            <a th:href="@{'/edit/' + ${student.id}}">
+                <button type="button" class="btn btn-primary btn-lg px-4 me-md-2">Edit</button>
+            </a>
+        </td>
+        <td>
+            <a th:href="@{'/delete/' + ${student.id}}">
+                <button type="button" class="btn btn-primary btn-lg px-4 me-md-2">Delete</button>
+            </a>
+        </td>
+        <td>
+            <!-- Display "Active" or "Inactive" based on the 'delete' attribute -->
+            <span th:text="${student.deleted ? 'Inactive' : 'Active'}"></span>
+        </td>
+    </tr>
+    </div>
+
+

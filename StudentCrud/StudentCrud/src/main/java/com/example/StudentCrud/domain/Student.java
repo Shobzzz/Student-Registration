@@ -14,6 +14,7 @@ public class Student {
 	private String studentname;
 	private String course;
 	private String fee;
+	public boolean deleted;
 	
 	public Student() {
 		super();
@@ -59,6 +60,15 @@ public class Student {
 	public void setFee(String fee) {
 		this.fee = fee;
 	}
+
+	public boolean isDeleted() {
+		return deleted;
+	}
+
+	public void setDeleted(boolean deleted) {
+		this.deleted = deleted;
+	}
+	
 	
 	
 	

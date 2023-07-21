@@ -1,0 +1,16 @@
+git remote add origin git@github.com:Shobzzz/Student-Registration.git
+
+
+
+step-
+1. creation- using 'touch "file name"
+2. check status- git status
+3. upload folder - git add .
+4. git commit -m "Initial Commit"
+5. stage to branch: git push 
+6. check status again
+
+
+To display all students: http://localhost:8080/?filter=all
+To display active students: http://localhost:8080/?filter=active
+To display inactive students: http://localhost:8080/?filter=inactive

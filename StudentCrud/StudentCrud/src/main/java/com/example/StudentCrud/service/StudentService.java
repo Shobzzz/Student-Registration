@@ -35,5 +35,13 @@ public class StudentService {
 	public void delete (long id) {
 		repo.deleteById(id);
 	}
+	
+	  public List<Student> listActiveStudents() {
+	        return repo.findByDeletedFalse();
+	    }
+
+	    public List<Student> listInactiveStudents() {
+	        return repo.findByDeletedTrue();
+	    }
 
 }
