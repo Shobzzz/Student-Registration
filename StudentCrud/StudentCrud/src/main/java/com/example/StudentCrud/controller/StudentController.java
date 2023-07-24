@@ -26,7 +26,7 @@ public class StudentController {
 	@Autowired
 	public StudentService service;
 	
-	  @GetMapping("/")
+	  @GetMapping("/index")
 	    public String viewHomePage(@RequestParam(value = "filter", required = false, defaultValue = "all") String filter, Model model) {
 	        List<Student> liststudent;
 	        if (filter.equals("active")) {
@@ -37,11 +37,28 @@ public class StudentController {
 	            liststudent = service.listAll();
 	        }
 	        model.addAttribute("liststudent", liststudent);
-	        
-	       
 	      
-	        return "index";
+	    return "index";
 	    }
+	  
+	  @GetMapping("/table")
+	    public String getFilteredTable(@RequestParam(name = "filter", required = false) String filter, Model model) {
+	        List<Student> filteredStudents;
+	        if ("active".equals(filter)) {
+	            filteredStudents = service.listActiveStudents();
+	        } else if ("inactive".equals(filter)) {
+	            filteredStudents = service.listInactiveStudents();
+	        } else {
+	            filteredStudents = service.listAll();
+	        }
+	        model.addAttribute("liststudent", filteredStudents);
+	        return "fragments/table_body :: table_Body";
+	    }
+	  
+	  
+	  
+	  
+	
 
 
 	
@@ -63,7 +80,7 @@ public class StudentController {
 	@RequestMapping(value = "/save",method= RequestMethod.POST)
 	public String saveStudent(@ModelAttribute("student")Student std) {
 		service.save(std);
-		return "redirect:/";
+		return "redirect:/index";
 	}
 	
 	@RequestMapping("/edit/{id}")
@@ -79,7 +96,7 @@ public class StudentController {
 	        Student std = service.get(id);
 	        std.setDeleted(true); // Soft delete by updating the 'deleted' status
 	        service.save(std); // Save the updated student
-	        return "redirect:/";
+	        return "redirect:/index";
 	    }
     
 }

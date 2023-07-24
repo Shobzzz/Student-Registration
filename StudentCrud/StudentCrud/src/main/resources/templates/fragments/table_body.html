@@ -1,8 +1,41 @@
 
 
 
-	<div th:fragment="table_Body">
-    <tr th:each="student : ${liststudent}">
+	<div  id="tableDiv" th:fragment="table_Body"  >
+		
+		
+	<div align="center">
+        <h1>Our Registered Family</h1>
+        <br>
+        <div align="center">
+            <label for="filterDropdown">Filter:</label>
+            <select id="filterDropdown" onchange="applyFilter(this.value)">
+                <option value="all">All</option>
+                <option value="active">Active</option>
+                <option value="inactive">Inactive</option>
+            </select>
+             
+        </div>	
+       
+		
+   <div class="col-sm-5" align="center">
+            <div class="panel-body" align="center">
+			
+                <table class="table" >
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Student ID</th>
+                            <th>Student Name</th>
+                            <th>Course</th>
+                            <th>Fee</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody">
+                   
+                     <tr th:each="student : ${liststudent}">
         <!-- Your table row content... -->
         <td th:text="${student.id}">Student ID</td>
         <td th:text="${student.studentname}">Student Name</td>
@@ -23,6 +56,14 @@
             <span th:text="${student.deleted ? 'Inactive' : 'Active'}"></span>
         </td>
     </tr>
+               
+                   </tbody>
+                   
+                </table>
+                </div>
+               
+            
+        </div>
     </div>
-
+    </div>
 

@@ -3,8 +3,9 @@
 
 <head>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/cosmo/bootstrap.min.css" />
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
+  
 
     <title>List</title>
 
@@ -30,7 +31,7 @@
                         <a class="nav-link " href="/home">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/">Our Members</a>
+                        <a class="nav-link active" aria-current="page" href="/index">Our Members</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/new">Register Now!</a>
@@ -39,56 +40,28 @@
             </div>
         </div>
     </nav>
-    <div align="center">
-        <h1>Our Registered Family</h1>
-        <br>
-        <div align="center">
-            <label for="filterDropdown">Filter:</label>
-            <select id="filterDropdown" onchange="applyFilter(this.value)">
-                <option value="all">All</option>
-                <option value="active">Active</option>
-                <option value="inactive">Inactive</option>
-            </select>
-        </div>
-
-        <div class="col-sm-5" align="center">
-            <div class="panel-body" align="center">
-			
-                <table class="table" >
-                    <thead class="thead-dark">
-                        <tr>
-                            <th>Student ID</th>
-                            <th>Student Name</th>
-                            <th>Course</th>
-                            <th>Fee</th>
-                            <th>Edit</th>
-                            <th>Delete</th>
-                            <th>Status</th>
-                        </tr>
-                    </thead>
-                    <tbody id="tableBody">
-                   
-                <div th:replace="~{fragments/table_body :: table_Body}"></div>
-                   </tbody>
-                   
-                </table>
-                </div>
-               
-            
-        </div>
+    
+        
+         <div   th:replace="~{fragments/table_body :: table_Body}">
+			 
+		 </div>
+       
+        
        
 
-    </div>
-
     <script>
+		
+		//applyFilter("all");
         function applyFilter(filter) {
             $.ajax({
                 type: "GET",
-                url: "/",
+                url: "/table",
                 data: { filter: filter },
                 success: function (data) {
                     // Update the table body with the filtered data
-                    $('#tableBody').html(data);
+                    
+              
+                    $('#tableDiv').html(data);
                 },
                 error: function (error) {
                     console.error("Error applying filter:", error);
