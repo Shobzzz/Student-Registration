@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <!-- Add any additional CSS styles for Course-details page -->
+    <title>Our Courses</title>
+    <style>
+	   
+	  
+	   
+	a {
+    text-decoration: none;
+    color:black;
+  }
+  
+ 
+  
+  
+  
+  
+</style>
+    
+</head>
+<body>
+	
+	<nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+
+    <a class="navbar-brand" href="/home">  <img src="book-half.svg" alt="book" height="20">  Amora</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="/home">Home  </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/index">Our Members </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/new"> Register Now </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/new-course"> Add New Course </a>
+        </li>
+         <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/course-details"> Our Courses </a>
+        </li>
+       
+      </ul>
+    </div>
+  </div>
+</nav>
+	
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <h1 class="text-center">Course Details</h1>
+                <br/>
+                <table class="table table-bordered">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Course ID</th>
+                            <th>Course Name</th>
+                            <th>Course Description</th>
+                            <th>Course Fee</th>
+                             <th>Edit</th>
+                            <th>Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Loop through the list of courses retrieved from the database -->
+                        <tr th:each="course : ${courses}">
+                            <td th:text="${course.courseId}">Course ID</td>
+                            <td th:text="${course.courseName}">Course Name</td>
+                            <td th:text="${course.courseDescription}">Course Description</td>
+                            <td th:text="${course.courseFee}">Course Fee</td>
+                              <td>
+                                <a th:href="@{'/edit-course/' + ${course.courseId}}">
+                                    <button type="button" class="btn btn-primary btn-sm">Edit</button>
+                                </a>
+                            </td>
+                            <td>
+                                <a th:href="@{'/delete-course/' + ${course.courseId}}">
+                                    <button type="button" class="btn btn-danger btn-sm">Delete</button>
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

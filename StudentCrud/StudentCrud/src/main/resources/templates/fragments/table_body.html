@@ -9,8 +9,8 @@
    <div class="col-sm-5" align="center">
             <div class="panel-body" align="center">
 			
-                <table class="table" >
-                    <thead class="thead-dark">
+                <table class="table table-bordered" >
+                    <thead class="table-dark">
                         <tr>
                             <th>Student ID</th>
                             <th>Student Name</th>
@@ -31,12 +31,12 @@
         <td th:text="${student.fee}">Fee</td>
         <td>
             <a th:href="@{'/edit/' + ${student.id}}">
-                <button type="button" class="btn btn-primary btn-lg px-4 me-md-2">Edit</button>
+                 <button type="button" class="btn btn-primary btn-sm">Edit</button>
             </a>
         </td>
         <td>
             <a th:href="@{'/delete/' + ${student.id}}">
-                <button type="button" class="btn btn-primary btn-lg px-4 me-md-2">Delete</button>
+                 <button type="button" class="btn btn-danger btn-sm">Delete</button>
             </a>
         </td>
         <td>
