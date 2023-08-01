@@ -16,8 +16,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import org.springframework.web.servlet.ModelAndView;
 
-
+import com.example.StudentCrud.domain.Course;
 import com.example.StudentCrud.domain.Student;
+import com.example.StudentCrud.service.CourseService;
 import com.example.StudentCrud.service.StudentService;
 
 @Controller
@@ -25,6 +26,14 @@ public class StudentController {
 	
 	@Autowired
 	public StudentService service;
+	
+	@Autowired
+	private CourseService courseService;
+	
+	
+	
+	
+
 	
 	  @GetMapping("/index")
 	    public String viewHomePage(@RequestParam(value = "filter", required = false, defaultValue = "all") String filter, Model model) {
@@ -72,6 +81,8 @@ public class StudentController {
 	 
 	@GetMapping("/new")
 	public String add(Model model) {
+		 List<Course> courses = courseService.getAllCourses();
+		    model.addAttribute("courses", courses);
 		model.addAttribute("student", new Student());
 		return "new";
 		
@@ -79,6 +90,7 @@ public class StudentController {
 	
 	@RequestMapping(value = "/save",method= RequestMethod.POST)
 	public String saveStudent(@ModelAttribute("student")Student std) {
+		
 		service.save(std);
 		return "redirect:/index";
 	}

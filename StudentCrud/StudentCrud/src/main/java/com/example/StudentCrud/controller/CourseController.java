@@ -38,6 +38,7 @@ public class CourseController {
         return "course-details";
     }
 
+
     // Controller method to redirect to the add-course page with previous values for editing
     @GetMapping("/edit-course/{id}")
     public String editCourse(@PathVariable("id") Long courseId, Model model) {

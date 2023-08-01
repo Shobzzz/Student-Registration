@@ -16,10 +16,17 @@ public class Course {
     private String courseName;
     private String courseFee;
     private String courseDescription;
+    
+    
 
     // Getters and setters
 
-    public Long getCourseId() {
+    public Course() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public Long getCourseId() {
         return courseId;
     }
 

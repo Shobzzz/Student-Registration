@@ -9,12 +9,15 @@ import org.springframework.stereotype.Service;
 import com.example.StudentCrud.domain.Course;
 import com.example.StudentCrud.repository.CourseRepository;
 
+import jakarta.transaction.Transactional;
+
 @Service
 public class CourseServiceImpl implements CourseService {
 
     @Autowired
     private CourseRepository courseRepository;
 
+    @Transactional
     @Override
     public List<Course> getAllCourses() {
         return courseRepository.findAll();
