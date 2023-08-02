@@ -46,7 +46,8 @@ public class StudentController {
 	            liststudent = service.listAll();
 	        }
 	        model.addAttribute("liststudent", liststudent);
-	      
+	        List<Course> courses = courseService.getAllCourses();
+	        model.addAttribute("courses", courses);
 	    return "index";
 	    }
 	  
