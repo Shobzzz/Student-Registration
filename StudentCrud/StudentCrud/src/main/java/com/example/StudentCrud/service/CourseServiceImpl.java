@@ -39,5 +39,21 @@ public class CourseServiceImpl implements CourseService {
         courseRepository.deleteById(id);
     }
     
+    @Override
+    public Course updateCourse(Course course) {
+        Optional<Course> existingCourseOptional = courseRepository.findById(course.getCourseId());
+        if (existingCourseOptional.isPresent()) {
+            Course existingCourse = existingCourseOptional.get();
+            existingCourse.setCourseName(course.getCourseName());
+            existingCourse.setCourseFee(course.getCourseFee());
+            existingCourse.setCourseDescription(course.getCourseDescription());
+            return courseRepository.save(existingCourse);
+        } else {
+            // Handle the case where the course doesn't exist
+            throw new CourseNotFoundException("Course not found with ID: " + course.getCourseId());
+        }
+    }
+
+    
   
 }

@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.ModelAndView;
+
 import com.example.StudentCrud.domain.Course;
 import com.example.StudentCrud.service.CourseService;
 
@@ -41,12 +43,14 @@ public class CourseController {
 
     // Controller method to redirect to the add-course page with previous values for editing
     @GetMapping("/edit-course/{id}")
-    public String editCourse(@PathVariable("id") Long courseId, Model model) {
-        Course course = courseService.getCourseById(courseId);
-        model.addAttribute("course", course);
-        return "add-course";
-    }
+    public ModelAndView editCourse(@PathVariable("id") Long courseId) {
+        ModelAndView modelAndView = new ModelAndView("add-course"); // Specify the view name
 
+        Course course = courseService.getCourseById(courseId);
+        modelAndView.addObject("course", course); // Add the course object to the model
+
+        return modelAndView;
+    }
     // Controller method to handle course deletion
     @GetMapping("/delete-course/{id}")
     public String deleteCourse(@PathVariable("id") Long courseId) {
@@ -56,9 +60,16 @@ public class CourseController {
     
     @PostMapping("/save-course")
     public String saveCourse(@ModelAttribute("course") Course course) {
-        courseService.saveCourse(course);
-        return "redirect:/course-details"; // Redirect to the Course-details page after saving the course
+        if (course.getCourseId() != null) {
+            // Existing course, update it
+            courseService.updateCourse(course);
+        } else {
+            // New course, save it
+            courseService.saveCourse(course);
+        }
+        return "redirect:/course-details";
     }
+
 //
 //    @PostMapping("/save-course")
 //    public String saveCourse(@ModelAttribute("course") Course course) {

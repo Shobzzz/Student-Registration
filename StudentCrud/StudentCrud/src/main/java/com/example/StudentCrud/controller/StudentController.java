@@ -96,13 +96,18 @@ public class StudentController {
 		return "redirect:/index";
 	}
 	
-	@RequestMapping("/edit/{id}")
-	public ModelAndView showEditStudentPage(@PathVariable(name = "id")int id) {
-		ModelAndView mav = new ModelAndView("new");
-		Student std= service.get(id);
-		mav.addObject("student",std);
-		return mav;
+	@GetMapping("/edit/{id}")
+	public ModelAndView showEditStudentPage(@PathVariable(name = "id") int id) {
+	    ModelAndView mav = new ModelAndView("new");
+	    Student std = service.get(id);
+	    mav.addObject("student", std);
+	    
+	    List<Course> courses = courseService.getAllCourses(); // Get the list of available courses
+	    mav.addObject("courses", courses); // Add it to the model
+	    
+	    return mav;
 	}
+
 	
 	 @RequestMapping("/delete/{id}")
 	    public String deletestudent(@PathVariable(name = "id") int id) {
